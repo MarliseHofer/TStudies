@@ -34,3 +34,6 @@ Plot T against pleasantness & compute correlation
     ## sample estimates:
     ##      cor 
     ## -0.34507
+
+This could be interesting if we had more data!!
+===============================================
