@@ -1,9 +1,9 @@
-GraphsT2
+GraphsT1
 ================
 Marlise Hofer
 November 19, 2016
 
-Exploring the T Study 2 data for only men
+Exploring the T Study 1 data for only men
 =========================================
 
     ## Loading tidyverse: ggplot2
@@ -26,14 +26,108 @@ Plot T against pleasantness & compute correlation
     ## 
     ##  Pearson's product-moment correlation
     ## 
-    ## data:  data$T.level and data$offer
-    ## t = -1.5159, df = 17, p-value = 0.1479
+    ## data:  data$Zpleas and data$Ztest
+    ## t = -2.0825, df = 34, p-value = 0.04489
     ## alternative hypothesis: true correlation is not equal to 0
     ## 95 percent confidence interval:
-    ##  -0.6909793  0.1294245
+    ##  -0.598714297 -0.008768588
     ## sample estimates:
-    ##      cor 
-    ## -0.34507
+    ##        cor 
+    ## -0.3363354
 
-This could be interesting if we had more data!!
-===============================================
+Pleasantness has one variable with Zscore of over 3
+===================================================
+
+What happens when we filter out that variable?
+
+![](GraphsT1_men_files/figure-markdown_github/unnamed-chunk-3-1.png)
+
+    ## 
+    ##  Pearson's product-moment correlation
+    ## 
+    ## data:  data1$Zpleas and data1$Ztest
+    ## t = -2.2719, df = 33, p-value = 0.02974
+    ## alternative hypothesis: true correlation is not equal to 0
+    ## 95 percent confidence interval:
+    ##  -0.62448034 -0.03934398
+    ## sample estimates:
+    ##        cor 
+    ## -0.3677686
+
+Now let's check while also removing the clean shirt
+===================================================
+
+![](GraphsT1_men_files/figure-markdown_github/unnamed-chunk-4-1.png)
+
+    ## 
+    ##  Pearson's product-moment correlation
+    ## 
+    ## data:  data2$Zpleas and data2$Ztest
+    ## t = -2.0278, df = 32, p-value = 0.05098
+    ## alternative hypothesis: true correlation is not equal to 0
+    ## 95 percent confidence interval:
+    ##  -0.606405131  0.000823849
+    ## sample estimates:
+    ##        cor 
+    ## -0.3374359
+
+Okay, now I'll look at graphs of dominance and prestige with T
+==============================================================
+
+![](GraphsT1_men_files/figure-markdown_github/unnamed-chunk-5-1.png)![](GraphsT1_men_files/figure-markdown_github/unnamed-chunk-5-2.png)
+
+Now I'll look at a graph of dominance with pleasantness
+=======================================================
+
+![](GraphsT1_men_files/figure-markdown_github/unnamed-chunk-6-1.png)
+
+    ## 
+    ##  Pearson's product-moment correlation
+    ## 
+    ## data:  data$Zpleas and data$Zdom
+    ## t = -1.888, df = 34, p-value = 0.06759
+    ## alternative hypothesis: true correlation is not equal to 0
+    ## 95 percent confidence interval:
+    ##  -0.57807270  0.02280464
+    ## sample estimates:
+    ##       cor 
+    ## -0.308039
+
+Pleasantness has one variable with Zscore of over 3
+===================================================
+
+What happens when we filter out that variable?
+
+![](GraphsT1_men_files/figure-markdown_github/unnamed-chunk-7-1.png)
+
+    ## 
+    ##  Pearson's product-moment correlation
+    ## 
+    ## data:  data4$Zpleas and data4$Ztest
+    ## t = -2.2719, df = 33, p-value = 0.02974
+    ## alternative hypothesis: true correlation is not equal to 0
+    ## 95 percent confidence interval:
+    ##  -0.62448034 -0.03934398
+    ## sample estimates:
+    ##        cor 
+    ## -0.3677686
+
+Graphs of prestige with pleasantness
+====================================
+
+![](GraphsT1_men_files/figure-markdown_github/unnamed-chunk-8-1.png)
+
+    ## 
+    ##  Pearson's product-moment correlation
+    ## 
+    ## data:  data$Zpleas and data$Zpres
+    ## t = 7.1489, df = 34, p-value = 2.896e-08
+    ## alternative hypothesis: true correlation is not equal to 0
+    ## 95 percent confidence interval:
+    ##  0.5988464 0.8795369
+    ## sample estimates:
+    ##       cor 
+    ## 0.7749221
+
+There seems to be no indication of any quadratic effects
+========================================================

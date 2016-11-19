@@ -1,0 +1,38 @@
+---
+title: "GraphsT2"
+author: "Marlise Hofer"
+date: "November 19, 2016"
+output: github_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, warning = FALSE)
+```
+#Exploring the T Study 2 data for only men
+
+```{r}
+#First, load some packages!
+
+library(tidyverse)
+library(knitr)
+library(ggthemes)
+library(ggplot2)
+
+#Set working directory & load data
+setwd("~/Dropbox/research/Role of Smell in Stress Reduction/dominance communication between men/TStudiesR/TStudy2")
+
+data <- read.csv("tstudy2.men.csv", header=TRUE)
+```
+
+#Plot T against pleasantness & compute correlation
+
+```{r}
+data %>% 
+	ggplot(aes(x = T.level, y = offer)) + 
+	geom_point() +
+	geom_smooth(color = "purple", lwd = 1, se=TRUE)
+
+cor.test(data$T.level, data$offer)
+```
+
+# This could be interesting if we had more data!!
