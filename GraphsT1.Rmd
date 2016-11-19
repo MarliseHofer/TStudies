@@ -1,0 +1,122 @@
+---
+title: "GraphsT1"
+author: "Marlise Hofer"
+date: "November 19, 2016"
+output: github_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, warning = FALSE)
+```
+
+```{r}
+#First, load some packages!
+
+library(tidyverse)
+library(knitr)
+library(ggthemes)
+library(ggplot2)
+
+#Set working directory & load data
+setwd("~/Dropbox/research/Role of Smell in Stress Reduction/dominance communication between men/TStudiesR")
+
+data <- read.csv("t_study1.csv", header=TRUE)
+```
+
+#Plot T against pleasantness & compute correlation
+ave_ple=plesantness
+
+```{r}
+data %>% 
+	ggplot(aes(x = avg_ple, y = test)) + 
+	geom_point() +
+	geom_smooth(color = "purple", lwd = 1, se=TRUE)
+
+cor.test(data$avg_ple, data$test)
+```
+
+correlation - r=0.035  p=.036
+
+#Exact same results with Zscored variables
+
+```{r}
+data %>% 
+	ggplot(aes(x = Zavg_ple, y = Ztest)) + 
+	geom_point() +
+	geom_smooth(color = "purple", lwd = 1, se=TRUE)
+
+```
+
+#Pleasantness has one variable with Zscore of over 3
+What happens when we filter out that variable?
+
+```{r}
+data %>% 
+	filter (shirt_code != "31") %>% 
+	ggplot(aes(x = Zavg_ple, y = Ztest)) + 
+	geom_point() +
+	geom_smooth(color = "purple", lwd = 1, se=TRUE)
+
+data1 <- filter (data, shirt_code != "31")
+cor.test(data1$Zavg_ple, data1$Ztest)
+```
+correlation is stronger - r=0.039 p=.021
+
+#Now let's check the correlation while also removing the clean shirt
+```{r}
+
+data2 <- filter (data, shirt_code != "31", shirt_code != "37")
+cor.test(data2$Zavg_ple, data2$Ztest)
+
+```
+correlation - r=0.035 p = .044. Correlation is still there and significant.
+
+#Okay, now I'll look at graphs of dominance and prestige with T
+```{r}
+data %>% 
+	ggplot(aes(x = Zavg_dom, y = Ztest)) + 
+	geom_point() +
+	geom_smooth(color = "purple", lwd = 1, se=TRUE)
+
+data %>% 
+	ggplot(aes(x = Zavg_pre, y = Ztest)) + 
+	geom_point() +
+	geom_smooth(color = "purple", lwd = 1, se=TRUE)
+```
+
+#Now I'll look at a graph of dominance with pleasantness
+```{r}
+data %>% 
+	ggplot(aes(x = Zavg_dom, y = Zavg_ple)) + 
+	geom_point() +
+	geom_smooth(color = "purple", lwd = 1, se=TRUE)
+
+cor.test(data$Zavg_ple, data$Zavg_dom)
+```
+correlation r=0.56  p=.0004
+
+#Take out the outlier in dominance (over 3 Zscore)
+```{r}
+data %>% 
+	filter (shirt_code != "7")  %>% 
+	ggplot(aes(x = Zavg_dom, y = Zavg_ple)) + 
+	geom_point() +
+	geom_smooth(color = "purple", lwd = 1, se=TRUE)
+
+data3 <- filter (data, shirt_code != "7")
+cor.test(data3$Zavg_ple, data3$Zavg_dom)
+```
+correlation r=0.45  p=.006. No real change.
+
+# Graphs of prestige with pleasantness
+```{r}
+data %>% 
+	ggplot(aes(x = Zavg_pre, y = Zavg_ple)) + 
+	geom_point() +
+	geom_smooth(color = "purple", lwd = 1, se=TRUE)
+
+cor.test(data$Zavg_ple, data$Zavg_pre)
+```
+correlation r=0.93
+
+#There seems to be no indication of any trend other than linear trends
