@@ -1,5 +1,5 @@
 ---
-title: "GraphsT1"
+title: "GraphsT2"
 author: "Marlise Hofer"
 date: "November 19, 2016"
 output: github_document
@@ -8,7 +8,7 @@ output: github_document
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE, warning = FALSE)
 ```
-#Exploring the T Study 1 data for only men
+#Exploring the T Study 2 data for only men
 
 ```{r}
 #First, load some packages!
@@ -19,94 +19,20 @@ library(ggthemes)
 library(ggplot2)
 
 #Set working directory & load data
-setwd("~/Dropbox/research/Role of Smell in Stress Reduction/dominance communication between men/TStudiesR")
+setwd("~/Dropbox/research/Role of Smell in Stress Reduction/dominance communication between men/TStudiesR/TStudy2")
 
-data <- read.csv("t_study1_male.csv", header=TRUE)
+data <- read.csv("tstudy2.men.csv", header=TRUE)
 ```
 
 #Plot T against pleasantness & compute correlation
 
 ```{r}
 data %>% 
-	ggplot(aes(x = Ztest, y = Zpleas)) + 
+	ggplot(aes(x = T.level, y = offer)) + 
 	geom_point() +
 	geom_smooth(color = "purple", lwd = 1, se=TRUE)
 
-cor.test(data$Zpleas, data$Ztest)
+cor.test(data$T.level, data$offer)
 ```
 
-#Pleasantness has one variable with Zscore of over 3
-What happens when we filter out that variable?
-
-```{r}
-data %>% 
-	filter (shirt_code != "31") %>% 
-	ggplot(aes(x = Ztest, y = Zpleas)) + 
-	geom_point() +
-	geom_smooth(color = "purple", lwd = 1, se=TRUE)
-
-data1 <- filter (data, shirt_code != "31")
-cor.test(data1$Zpleas, data1$Ztest)
-```
-
-#Now let's check while also removing the clean shirt
-```{r}
-data %>% 
-	filter (shirt_code != "31", shirt_code != "37") %>% 
-	ggplot(aes(x = Ztest, y = Zpleas)) + 
-	geom_point() +
-	geom_smooth(color = "purple", lwd = 1, se=TRUE)
-
-data2 <- filter (data, shirt_code != "31", shirt_code != "37")
-cor.test(data2$Zpleas, data2$Ztest)
-
-```
-
-#Okay, now I'll look at graphs of dominance and prestige with T
-```{r}
-data %>% 
-	ggplot(aes(x = Ztest, y = Zdom)) + 
-	geom_point() +
-	geom_smooth(color = "purple", lwd = 1, se=TRUE)
-
-data %>% 
-	ggplot(aes(x = Ztest, y = Zpres)) + 
-	geom_point() +
-	geom_smooth(color = "purple", lwd = 1, se=TRUE)
-```
-
-#Now I'll look at a graph of dominance with pleasantness
-```{r}
-data %>% 
-	ggplot(aes(x = Zdom, y = Zpleas)) + 
-	geom_point() +
-	geom_smooth(color = "purple", lwd = 1, se=TRUE)
-
-cor.test(data$Zpleas, data$Zdom)
-```
-#Pleasantness has one variable with Zscore of over 3
-What happens when we filter out that variable?
-
-```{r}
-data %>% 
-	filter (shirt_code != "31") %>% 
-	ggplot(aes(x = Zdom, y = Zpleas)) + 
-	geom_point() +
-	geom_smooth(color = "purple", lwd = 1, se=TRUE)
-
-data4 <- filter (data, shirt_code != "31")
-cor.test(data4$Zpleas, data4$Ztest)
-```
-
-
-# Graphs of prestige with pleasantness
-```{r}
-data %>% 
-	ggplot(aes(x = Zpleas, y = Zpres)) + 
-	geom_point() +
-	geom_smooth(color = "purple", lwd = 1, se=TRUE)
-
-cor.test(data$Zpleas, data$Zpres)
-```
-
-#There seems to be no indication of any quadratic effects
+# This could be interesting if we had more data!!

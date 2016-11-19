@@ -1,5 +1,5 @@
 #set working directory
-setwd("~/Dropbox/research/Role of Smell in Stress Reduction/dominance communication between men/Study 1 Data/t study 1 data_hanne/Rgraphs")
+setwd("~/Dropbox/research/Role of Smell in Stress Reduction/dominance communication between men/TStudiesR")
 
 #The data 
 data <- read.csv("t_study1.csv", header=TRUE)
