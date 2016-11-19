@@ -8,7 +8,8 @@ output: github_document
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE, warning = FALSE)
 ```
-# Let's look at some scatterplots!
+#Exploring the T Study 1 data for only men
+
 ```{r}
 #First, load some packages!
 
@@ -20,31 +21,18 @@ library(ggplot2)
 #Set working directory & load data
 setwd("~/Dropbox/research/Role of Smell in Stress Reduction/dominance communication between men/TStudiesR")
 
-data <- read.csv("t_study1.csv", header=TRUE)
+data <- read.csv("t_study1_male.csv", header=TRUE)
 ```
 
 #Plot T against pleasantness & compute correlation
-ave_ple=plesantness
 
 ```{r}
 data %>% 
-	ggplot(aes(x = test, y = avg_ple)) + 
+	ggplot(aes(x = Ztest, y = Zpleas)) + 
 	geom_point() +
 	geom_smooth(color = "purple", lwd = 1, se=TRUE)
 
-cor.test(data$avg_ple, data$test)
-```
-
-correlation - r=0.035  p=.036
-
-#Exact same results with Zscored variables
-
-```{r}
-data %>% 
-	ggplot(aes(x = Ztest, y = Zavg_ple)) + 
-	geom_point() +
-	geom_smooth(color = "purple", lwd = 1, se=TRUE)
-
+cor.test(data$Zpleas, data$Ztest)
 ```
 
 #Pleasantness has one variable with Zscore of over 3
@@ -53,33 +41,36 @@ What happens when we filter out that variable?
 ```{r}
 data %>% 
 	filter (shirt_code != "31") %>% 
-	ggplot(aes(x = Ztest, y = Zavg_ple)) + 
+	ggplot(aes(x = Ztest, y = Zpleas)) + 
 	geom_point() +
 	geom_smooth(color = "purple", lwd = 1, se=TRUE)
 
 data1 <- filter (data, shirt_code != "31")
-cor.test(data1$Zavg_ple, data1$Ztest)
+cor.test(data1$Zpleas, data1$Ztest)
 ```
-correlation is stronger - r=0.039 p=.021
 
-#Now let's check the correlation while also removing the clean shirt
+#Now let's check while also removing the clean shirt
 ```{r}
+data %>% 
+	filter (shirt_code != "31", shirt_code != "37") %>% 
+	ggplot(aes(x = Ztest, y = Zpleas)) + 
+	geom_point() +
+	geom_smooth(color = "purple", lwd = 1, se=TRUE)
 
 data2 <- filter (data, shirt_code != "31", shirt_code != "37")
-cor.test(data2$Zavg_ple, data2$Ztest)
+cor.test(data2$Zpleas, data2$Ztest)
 
 ```
-correlation - r=0.035 p = .044. Correlation is still there and significant.
 
 #Okay, now I'll look at graphs of dominance and prestige with T
 ```{r}
 data %>% 
-	ggplot(aes(x = Ztest, y = Zavg_dom)) + 
+	ggplot(aes(x = Ztest, y = Zdom)) + 
 	geom_point() +
 	geom_smooth(color = "purple", lwd = 1, se=TRUE)
 
 data %>% 
-	ggplot(aes(x = Ztest, y = Zavg_pre)) + 
+	ggplot(aes(x = Ztest, y = Zpres)) + 
 	geom_point() +
 	geom_smooth(color = "purple", lwd = 1, se=TRUE)
 ```
@@ -87,36 +78,35 @@ data %>%
 #Now I'll look at a graph of dominance with pleasantness
 ```{r}
 data %>% 
-	ggplot(aes(x = Zavg_dom, y = Zavg_ple)) + 
+	ggplot(aes(x = Zdom, y = Zpleas)) + 
 	geom_point() +
 	geom_smooth(color = "purple", lwd = 1, se=TRUE)
 
-cor.test(data$Zavg_ple, data$Zavg_dom)
+cor.test(data$Zpleas, data$Zdom)
 ```
-correlation r=0.56  p=.0004
+#Pleasantness has one variable with Zscore of over 3
+What happens when we filter out that variable?
 
-#Take out the outlier in dominance (over 3 Zscore)
 ```{r}
 data %>% 
-	filter (shirt_code != "7")  %>% 
-	ggplot(aes(x = Zavg_dom, y = Zavg_ple)) + 
+	filter (shirt_code != "31") %>% 
+	ggplot(aes(x = Zdom, y = Zpleas)) + 
 	geom_point() +
 	geom_smooth(color = "purple", lwd = 1, se=TRUE)
 
-data3 <- filter (data, shirt_code != "7")
-cor.test(data3$Zavg_ple, data3$Zavg_dom)
+data4 <- filter (data, shirt_code != "31")
+cor.test(data4$Zpleas, data4$Ztest)
 ```
-correlation r=0.45  p=.006. No real change.
+
 
 # Graphs of prestige with pleasantness
 ```{r}
 data %>% 
-	ggplot(aes(x = Zavg_ple, y = Zavg_pre)) + 
+	ggplot(aes(x = Zpleas, y = Zpres)) + 
 	geom_point() +
 	geom_smooth(color = "purple", lwd = 1, se=TRUE)
 
-cor.test(data$Zavg_ple, data$Zavg_pre)
+cor.test(data$Zpleas, data$Zpres)
 ```
-correlation r=0.93
 
-#There seems to be no indication of any trend other than linear trends
+#There seems to be no indication of any quadratic effects
