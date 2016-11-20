@@ -85,7 +85,33 @@ correlation - r=0.035 p = .044. Correlation is still there and significant.
 Okay, now I'll look at graphs of dominance and prestige with T
 ==============================================================
 
-![](GraphsT1_files/figure-markdown_github/unnamed-chunk-6-1.png)![](GraphsT1_files/figure-markdown_github/unnamed-chunk-6-2.png)
+![](GraphsT1_files/figure-markdown_github/unnamed-chunk-6-1.png)
+
+    ## 
+    ##  Pearson's product-moment correlation
+    ## 
+    ## data:  data$Zavg_dom and data$Ztest
+    ## t = 1.9854, df = 34, p-value = 0.05521
+    ## alternative hypothesis: true correlation is not equal to 0
+    ## 95 percent confidence interval:
+    ##  -0.006951639  0.588533927
+    ## sample estimates:
+    ##       cor 
+    ## 0.3223202
+
+![](GraphsT1_files/figure-markdown_github/unnamed-chunk-6-2.png)
+
+    ## 
+    ##  Pearson's product-moment correlation
+    ## 
+    ## data:  data$Zavg_pre and data$Ztest
+    ## t = -1.9905, df = 34, p-value = 0.05463
+    ## alternative hypothesis: true correlation is not equal to 0
+    ## 95 percent confidence interval:
+    ##  -0.589072462  0.006127358
+    ## sample estimates:
+    ##        cor 
+    ## -0.3230587
 
 Now I'll look at a graph of dominance with pleasantness
 =======================================================
