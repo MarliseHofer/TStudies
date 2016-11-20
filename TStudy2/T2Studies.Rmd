@@ -24,7 +24,7 @@ setwd("~/Dropbox/research/Role of Smell in Stress Reduction/dominance communicat
 data <- read.csv("tstudy2.men.csv", header=TRUE)
 ```
 
-#Plot T against pleasantness & compute correlation
+#Plot T against game offer & compute correlation
 
 ```{r}
 data %>% 

@@ -81,7 +81,33 @@ Now let's check while also removing the clean shirt
 Okay, now I'll look at graphs of dominance and prestige with T
 ==============================================================
 
-![](GraphsT1_women_files/figure-markdown_github/unnamed-chunk-6-1.png)![](GraphsT1_women_files/figure-markdown_github/unnamed-chunk-6-2.png)
+![](GraphsT1_women_files/figure-markdown_github/unnamed-chunk-6-1.png)
+
+    ## 
+    ##  Pearson's product-moment correlation
+    ## 
+    ## data:  data$Zdom and data$Ztest
+    ## t = 2.5114, df = 34, p-value = 0.01694
+    ## alternative hypothesis: true correlation is not equal to 0
+    ## 95 percent confidence interval:
+    ##  0.07705418 0.64082897
+    ## sample estimates:
+    ##       cor 
+    ## 0.3955759
+
+![](GraphsT1_women_files/figure-markdown_github/unnamed-chunk-6-2.png)
+
+    ## 
+    ##  Pearson's product-moment correlation
+    ## 
+    ## data:  data$Zpres and data$Ztest
+    ## t = -1.5999, df = 34, p-value = 0.1189
+    ## alternative hypothesis: true correlation is not equal to 0
+    ## 95 percent confidence interval:
+    ##  -0.54570356  0.07001486
+    ## sample estimates:
+    ##        cor 
+    ## -0.2646075
 
 Now I'll look at a graph of dominance with pleasantness
 =======================================================

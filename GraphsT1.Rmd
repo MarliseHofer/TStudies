@@ -77,11 +77,13 @@ data %>%
 	ggplot(aes(x = Ztest, y = Zavg_dom)) + 
 	geom_point() +
 	geom_smooth(color = "purple", lwd = 1, se=TRUE)
+cor.test(data$Zavg_dom, data$Ztest)
 
 data %>% 
 	ggplot(aes(x = Ztest, y = Zavg_pre)) + 
 	geom_point() +
 	geom_smooth(color = "purple", lwd = 1, se=TRUE)
+cor.test(data$Zavg_pre, data$Ztest)
 ```
 
 #Now I'll look at a graph of dominance with pleasantness
